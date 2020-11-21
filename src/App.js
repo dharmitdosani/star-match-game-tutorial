@@ -1,5 +1,19 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
+
+const StarsDisplay = props => (
+  <Fragment>
+    {utils.range(1, props.count).map(starId =>
+      <div key={starId} className="star" />
+    )}
+  </Fragment>
+);
+
+const PlayNumber = props => (
+  <button className="number" onClick={() => console.log(props.number)}>
+    {props.number}
+  </button>
+);
 
 const App = (props) => {
   const [stars, setStars] = useState(utils.random(1, 9));
@@ -10,13 +24,11 @@ const App = (props) => {
       </div>
       <div className="body">
         <div className="left">
-          {utils.range(1, stars).map(starId =>
-            <div key={starId} className="star" />
-          )}
+          <StarsDisplay count={stars}/>
         </div>
         <div className="right">
           {utils.range(1, 9).map(number =>
-            <button key={number} className="number">{number}</button>
+            <PlayNumber key={number} number={number}/>
           )}
         </div>
       </div>
